@@ -3,16 +3,19 @@ const Tutorial = db.tutorials;
 
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
-    if (!req.body.title) {
+    if (!req.body.name) {
         res.status(400).send({ message: "Content can not be empty!" });
         return;
     }
 
     // Create tutorial
     const tutorial = new Tutorial({
-        title: req.body.title,
+        name: req.body.name,
         description: req.body.description,
-        published: req.body.published ? req.body.published : false
+        published: req.body.published ? req.body.published : false,
+        thumbnail: req.body.thumbnail ? req.body.thumbnail : '',
+        videoUrl: req.body.videoUrl ? req.body.videoUrl : '',
+        tagIds: req.body.tagIds ? req.body.tagIds : []
     });
 
     // Save Tutorial in DB
